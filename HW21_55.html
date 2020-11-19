@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>HW21_55</title>
+    <style type="text/css">
+
+
+    </style>
+  </head>
+  <body>
+
+  	<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+    <div class="main">
+      <label>點選此處上傳圖片ddd</label>
+      <input type="file" id="file">
+      <button id='delete'>刪除已選圖片</button>
+    </div>
+    <div id="display" style="width: 50px"></div>
+    
+<script type="text/javascript">
+var file = document.getElementById("file");
+var del = document.getElementById('delete');
+var display = document.getElementById('display');
+
+file.addEventListener('change',function(){
+  var myfile = file.files;
+if(myfile!==null){
+for(var i=0;i<myfile.length;i++){
+  var files =myfile[i];
+  if(files.type.indexOf('image')>-1){
+    var reader = new FileReader;
+    reader.addEventListener('load',function(e){
+var pic = document.createElement('pic');
+pic.classList.add('figBlock');
+pic.innerHTML =`
+    <input type="checkbox" class="check">
+    <img class="pic" src="` + e.target.result + `" alt="">`
+
+    display.append(pic);
+  });
+  reader.readAsDataURL(files);
+  }
+}
+}
+});
+
+
+
+
+
+var check = document.getElementsByClassName('check');
+del.addEventListener('click', function () {
+    for (var i = (check.length - 1); i >= 0; i--) {
+        // console.log(check[i]);
+        var parentFigure = check[i].closest(".figBlock");
+        if (check[i].checked) {
+            parentFigure.remove();
+        }
+    }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
